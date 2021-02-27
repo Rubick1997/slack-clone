@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Avatar } from "@material-ui/core";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
@@ -10,9 +10,6 @@ function Header() {
 		<HeaderContainer>
 			{/* Header left*/}
 			<HeaderLeft>
-				<HeaderAvatar
-				//Add onClick
-				/>
 				<AccessTimeIcon />
 			</HeaderLeft>
 			{/* Header search*/}
@@ -23,6 +20,9 @@ function Header() {
 			{/* Header right*/}
 			<HeaderRight>
 				<HelpOutlineIcon />
+				<HeaderAvatar
+				//Add onClick
+				/>
 			</HeaderRight>
 		</HeaderContainer>
 	);
@@ -56,15 +56,14 @@ const HeaderLeft = styled.div`
 const HeaderRight = styled.div`
 	flex: 0.3;
 	display: flex;
-	align-items: flex-end;
+	justify-content: space-between;
 
 	> .MuiSvgIcon-root {
-		margin-left: auto;
 		margin-right: 20px;
 	}
 `;
 
-const HeaderAvatar = styled(Avatar)`
+const HeaderAvatar = styled(AccountBoxIcon)`
 	cursor: pointer;
 	:hover {
 		opacity: 0.8;
