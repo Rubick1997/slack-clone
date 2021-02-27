@@ -12,6 +12,8 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
+import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
+import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
 
 function Sidebar() {
 	return (
@@ -37,7 +39,15 @@ function Sidebar() {
 				title='People & user groups'
 			/>
 			<SidebarOptions Icon={AppsOutlinedIcon} title='Apps' />
-			<SidebarOptions Icon={ExpandLessOutlinedIcon} title='Apps' />
+			<SidebarOptions Icon={ExpandLessOutlinedIcon} title='Show less' />
+			<hr />
+			<SidebarOptions Icon={ExpandMoreOutlinedIcon} title='Channels' />
+			<hr />
+			<SidebarOptions
+				Icon={AddOutlinedIcon}
+				addChannelOption
+				title='Add Channel'
+			/>
 		</SidebarContainer>
 	);
 }
@@ -51,6 +61,11 @@ const SidebarContainer = styled.div`
 	border-top: 0.5px solid #49274b;
 	max-width: 260px;
 	margin-top: 45px;
+	> hr {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		border: 1px solid #49274b;
+	}
 `;
 
 const SidebarHeader = styled.div`
