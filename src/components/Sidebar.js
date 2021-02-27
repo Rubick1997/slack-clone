@@ -14,8 +14,11 @@ import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
+import { db } from "../firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 function Sidebar() {
+	const [channels, loading, error] = useCollection(db.collection("rooms"));
 	return (
 		<SidebarContainer>
 			<SidebarHeader>
@@ -48,6 +51,13 @@ function Sidebar() {
 				addChannelOption
 				title='Add Channel'
 			/>
+			{channels?.docs.map((doc) => (
+				<SidebarOptions
+					key={doc.id}
+					id={doc.id}
+					title={doc.data().name}
+				/>
+			))}
 		</SidebarContainer>
 	);
 }
