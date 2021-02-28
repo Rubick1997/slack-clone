@@ -64,7 +64,8 @@ const HeaderLeft = styled.div`
 const HeaderRight = styled.div`
 	flex: 0.3;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
+	align-items: center;
 
 	> .MuiSvgIcon-root {
 		margin-right: 20px;
