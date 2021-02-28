@@ -4,9 +4,12 @@ import styled from "styled-components";
 import SendIcon from "@material-ui/icons/Send";
 import { db } from "../firebase";
 import firebase from "firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
-function ChactInput({ channelName, channelId }) {
+function ChactInput({ channelName, channelId, chatRef }) {
 	const [input, setInput] = useState("");
+	const [user] = useAuthState(auth);
 
 	const sendMessage = (e) => {
 		e.preventDefault();
@@ -18,10 +21,14 @@ function ChactInput({ channelName, channelId }) {
 		db.collection("rooms").doc(channelId).collection("messages").add({
 			message: input,
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-			user: "Rustam Kolumbayev",
-			userImage:
-				"https://pm1.narvii.com/6717/853fa0542c4a453c28da102ab8bcad61c416de9c_hq.jpg",
+			user: user.displayName,
+			userImage: user.photoURL,
 		});
+
+		chatRef.current.scrollIntoView({
+			behavior: "smooth",
+		});
+
 		setInput("");
 	};
 	return (

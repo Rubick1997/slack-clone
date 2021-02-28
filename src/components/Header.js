@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
+import {Avatar} from "@material-ui/core"
 function Header() {
+	const [user] = useAuthState(auth);
+	
 	return (
 		<HeaderContainer>
 			{/* Header left*/}
@@ -21,7 +24,12 @@ function Header() {
 			<HeaderRight>
 				<HelpOutlineIcon />
 				<HeaderAvatar
-				//Add onClick
+					variant='rounded'
+					src={user?.photoURL}
+					alt={user?.displayName}
+					onClick={() => {
+						auth.signOut();
+					}}
 				/>
 			</HeaderRight>
 		</HeaderContainer>
@@ -63,7 +71,7 @@ const HeaderRight = styled.div`
 	}
 `;
 
-const HeaderAvatar = styled(AccountBoxIcon)`
+const HeaderAvatar = styled(Avatar)`
 	cursor: pointer;
 	:hover {
 		opacity: 0.8;

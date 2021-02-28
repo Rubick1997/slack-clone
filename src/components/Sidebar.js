@@ -16,9 +16,13 @@ import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
 import { db } from "../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
 function Sidebar() {
 	const [channels, loading, error] = useCollection(db.collection("rooms"));
+	const [user] = useAuthState(auth);
+
 	return (
 		<SidebarContainer>
 			<SidebarHeader>
@@ -26,7 +30,7 @@ function Sidebar() {
 					<h2>Slack Clone</h2>
 					<h3>
 						<FiberManualRecordIcon />
-						Rustam Kolumbayev
+						{user.displayName}
 					</h3>
 				</SidebarInfo>
 				<CreateIcon />
@@ -52,11 +56,7 @@ function Sidebar() {
 				title='Add Channel'
 			/>
 			{channels?.docs.map((doc) => (
-				<SidebarOptions
-					key={doc.id}
-					id={doc.id}
-					title={doc.data().name}
-				/>
+				<SidebarOptions key={doc.id} id={doc.id} title={doc.data().name} />
 			))}
 		</SidebarContainer>
 	);
