@@ -20,7 +20,7 @@ function ChactInput({ channelName, channelId }) {
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 			user: "Rustam Kolumbayev",
 			userImage:
-				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDnOnURL6mcF3CUTQd-CQcT-nuKDOiK2FhHQ&usqp=CAU",
+				"https://pm1.narvii.com/6717/853fa0542c4a453c28da102ab8bcad61c416de9c_hq.jpg",
 		});
 		setInput("");
 	};
@@ -30,7 +30,7 @@ function ChactInput({ channelName, channelId }) {
 				<input
 					value={input}
 					onChange={(e) => setInput(e.target.value)}
-					placeholder={`Message #room`}
+					placeholder={`Message #${channelName}`}
 				/>
 				<Button type='submit' onClick={sendMessage}>
 					<SendIcon />
@@ -52,7 +52,7 @@ const ChatInputContainer = styled.div`
 	> form > input {
 		position: fixed;
 		bottom: 0.5px;
-		width: 75%;
+		width: 60%;
 		border: 1px solid gray;
 		border-radius: 3px;
 		height: 40px;
